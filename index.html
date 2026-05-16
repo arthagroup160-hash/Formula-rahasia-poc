@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formula POC Premium — Jangkrik & Ulat Hongkong</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Fraunces:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --h:#1b4332;--hm:#2d6a4f;--hl:#40916c;--hp:#c8e6c9;--hx:#e8f5e8;
+    --k:#faf7f0;--kd:#ede8dc;
+    --g:#b8860b;--gm:#c9a84c;--gl:#e8c870;--gx:#fff8e0;
+    --me:#c0392b;--mep:#fde8e8;
+    --bi:#1565c0;--bip:#e3f2fd;
+    --or:#e65100;--orp:#fff3e0;
+    --pu:#6a1b9a;--pup:#f3e5f5;
+    --w:#fff;--t:#1c1c1c;--ta:#555;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Outfit',sans-serif;background:var(--k);color:var(--t);font-size:14px;line-height:1.7}
+
+  /* HERO */
+  .hero{background:linear-gradient(150deg,#0a0a1a 0%,#1a0a2e 40%,#2d1a4f 80%,#1b4332 100%);padding:48px 20px 56px;color:#fff;position:relative;overflow:hidden}
+  .hero::before{content:'🦗';position:absolute;font-size:160px;right:-20px;top:-10px;opacity:0.07;line-height:1}
+  .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:36px;background:var(--k);clip-path:ellipse(58% 100% at 50% 100%)}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.4);color:var(--gl);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:16px}
+  .hero h1{font-family:'Cinzel',serif;font-size:26px;font-weight:900;line-height:1.1;margin-bottom:8px}
+  .hero h1 span{color:var(--gl)}
+  .hero p{color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:22px;max-width:440px}
+  .hero-stats{display:flex;gap:10px;flex-wrap:wrap}
+  .hs{background:rgba(255,255,255,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:10px 14px}
+  .hs-val{font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--gl)}
+  .hs-lbl{font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:1px;text-transform:uppercase;margin-top:1px}
+
+  .wrap{padding:24px 16px 48px;max-width:720px;margin:0 auto}
+
+  .sec{display:flex;align-items:center;gap:10px;margin:28px 0 14px}
+  .sec-num{width:32px;height:32px;background:linear-gradient(135deg,var(--pu),#9c27b0);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:15px;font-weight:900;flex-shrink:0}
+  .sec h2{font-family:'Fraunces',serif;font-size:19px;font-weight:700;color:var(--h)}
+
+  .card{background:var(--w);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.07);margin-bottom:14px;animation:up .4s ease both}
+  @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.1s}.card:nth-child(3){animation-delay:.15s}.card:nth-child(4){animation-delay:.2s}.card:nth-child(5){animation-delay:.25s}.card:nth-child(6){animation-delay:.3s}
+  .card-body{padding:18px 20px}
+
+  /* VERSUS */
+  .versus{display:grid;grid-template-columns:1fr auto 1fr;border-radius:14px;overflow:hidden;margin-bottom:14px}
+  .vs-old{background:linear-gradient(135deg,#2d4a2d,#1b4332);padding:16px;color:#fff}
+  .vs-new{background:linear-gradient(135deg,#1a0a2e,#4a1a6e);padding:16px;color:#fff}
+  .vs-mid{background:#0a0a0a;display:flex;align-items:center;justify-content:center;padding:0 12px}
+  .vs-mid span{font-family:'Fraunces',serif;font-size:16px;font-weight:900;color:var(--gl)}
+  .vs-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:0.6;margin-bottom:6px}
+  .vs-name{font-family:'Fraunces',serif;font-size:15px;font-weight:700;margin-bottom:8px}
+  .vs-items{font-size:12px;opacity:0.8;line-height:1.9}
+
+  /* FORMULA BANNER */
+  .formula{border-radius:14px;padding:18px 20px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden}
+  .formula.jk{background:linear-gradient(135deg,#0a0a1a,#1a0a2e,#3a1a5e)}
+  .formula.uh{background:linear-gradient(135deg,#1a0a00,#3a1a00,#5a2a00)}
+  .formula.combo{background:linear-gradient(135deg,#0a1a0a,var(--h),#1a0a2e)}
+  .formula::after{position:absolute;right:14px;bottom:-4px;font-size:50px;opacity:0.12}
+  .formula.jk::after{content:'🦗'}
+  .formula.uh::after{content:'🐛'}
+  .formula.combo::after{content:'⚗️'}
+  .f-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gl);font-weight:600;margin-bottom:6px}
+  .f-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:12px}
+  .f-items{display:flex;flex-direction:column;gap:6px}
+  .f-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.07);border-radius:8px;padding:8px 12px;font-size:13px}
+  .f-item .fi-n{color:rgba(255,255,255,0.85)}
+  .f-item .fi-q{font-weight:700;color:var(--gl);font-family:'Fraunces',serif}
+  .f-note{margin-top:10px;background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 12px;font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6}
+
+  /* KANDUNGAN COMPARE */
+  .kand-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+  .kand-item{border-radius:12px;padding:14px;text-align:center}
+  .kand-item.biasa{background:var(--hx);border:1px solid var(--hp)}
+  .kand-item.jk{background:var(--pup);border:1px solid #ce93d8}
+  .kand-item.uh{background:var(--orp);border:1px solid #ffcc80}
+  .kand-ico{font-size:24px;margin-bottom:6px}
+  .kand-name{font-size:11px;font-weight:700;margin-bottom:8px}
+  .kand-item.biasa .kand-name{color:var(--h)}
+  .kand-item.jk .kand-name{color:var(--pu)}
+  .kand-item.uh .kand-name{color:var(--or)}
+  .kand-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
+  .kand-row .kr-l{color:var(--ta)}
+  .kand-row .kr-r{font-weight:700}
+  .kand-item.biasa .kr-r{color:var(--hm)}
+  .kand-item.jk .kr-r{color:var(--pu)}
+  .kand-item.uh .kr-r{color:var(--or)}
+  .kand-star{display:inline-flex;gap:2px;margin-top:6px;font-size:11px}
+
+  /* TABLE */
+  .tbl-wrap{overflow-x:auto;border-radius:10px;border:1px solid #e8e4da}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead tr{background:linear-gradient(90deg,#1a0a2e,var(--pu));color:#fff}
+  thead th{padding:10px 12px;text-align:left;font-weight:600;font-size:12px;letter-spacing:.3px}
+  tbody tr:nth-child(even){background:#fafaf7}
+  tbody tr:hover{background:var(--pup);transition:background .2s}
+  tbody td{padding:9px 12px;border-bottom:1px solid #f0ece2;vertical-align:middle;font-size:13px}
+  tbody td:first-child{font-weight:600;color:var(--h)}
+  tbody tr.sub td{background:var(--hx);font-weight:700;color:var(--h);border-top:2px solid var(--hp)}
+  tbody tr.total-row td{background:linear-gradient(90deg,#1a0a2e,var(--pu));color:#fff;font-weight:700}
+  tbody tr.total-row td:last-child{color:var(--gl);font-family:'Fraunces',serif;font-size:15px}
+
+  /* STEPS */
+  .steps{list-style:none}
+  .steps li{display:flex;gap:14px;padding:12px 0;border-bottom:1px dashed #e8e4da}
+  .steps li:last-child{border-bottom:none}
+  .snum{width:30px;height:30px;background:linear-gradient(135deg,var(--pu),#9c27b0);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:2px}
+  .stext strong{display:block;font-size:14px;font-weight:600;color:var(--h);margin-bottom:2px}
+  .stext span{font-size:13px;color:var(--ta)}
+  .stag{display:inline-block;background:var(--pup);color:var(--pu);font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:4px;border:1px solid #ce93d8}
+  .stag-g{display:inline-block;background:var(--hx);color:var(--hm);font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:4px;border:1px solid var(--hp)}
+  .stag-o{display:inline-block;background:var(--orp);color:var(--or);font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:4px;border:1px solid #ffcc80}
+
+  /* BOX */
+  .tip{background:var(--gx);border-left:4px solid var(--gm);border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:12px;font-size:13px}
+  .tip .tt{font-weight:700;color:var(--g);margin-bottom:4px}
+  .info{background:var(--bip);border-left:4px solid var(--bi);border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:12px;font-size:13px}
+  .info .it{font-weight:700;color:var(--bi);margin-bottom:4px}
+  .warn{background:var(--mep);border-left:4px solid var(--me);border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:12px;font-size:13px}
+  .warn .wt{font-weight:700;color:var(--me);margin-bottom:4px}
+  .premium{background:var(--pup);border-left:4px solid var(--pu);border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:12px;font-size:13px}
+  .premium .pt{font-weight:700;color:var(--pu);margin-bottom:4px}
+
+  /* PRODUK GRID */
+  .produk-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+  .pg-item{border-radius:14px;padding:18px;position:relative;overflow:hidden}
+  .pg-item.regular{background:linear-gradient(135deg,var(--hx),var(--hp))}
+  .pg-item.premium{background:linear-gradient(135deg,var(--pup),#e1bee7)}
+  .pg-ico{font-size:32px;margin-bottom:8px}
+  .pg-name{font-family:'Fraunces',serif;font-size:15px;font-weight:700;margin-bottom:4px}
+  .pg-item.regular .pg-name{color:var(--h)}
+  .pg-item.premium .pg-name{color:var(--pu)}
+  .pg-desc{font-size:12px;color:var(--ta);line-height:1.5;margin-bottom:8px}
+  .pg-price{font-family:'Fraunces',serif;font-size:20px;font-weight:900}
+  .pg-item.regular .pg-price{color:var(--hm)}
+  .pg-item.premium .pg-price{color:var(--pu)}
+  .pg-sub{font-size:10px;color:var(--ta)}
+
+  /* PROFIT CARD */
+  .profit-card{background:linear-gradient(150deg,#0a0a1a,#1a0a2e,var(--pu));border-radius:14px;padding:22px;color:#fff;margin-bottom:14px}
+  .pc-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:12px}
+  .pc-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.08);font-size:13px}
+  .pc-row:last-child{border-bottom:none}
+  .pc-row .pl{color:rgba(255,255,255,0.65)}
+  .pc-row .pr{font-weight:700;font-family:'Fraunces',serif}
+  .pc-row.minus .pr{color:#ff8a80}
+  .pc-row.hasil .pl{color:#fff;font-weight:600;font-size:14px}
+  .pc-row.hasil .pr{color:var(--gl);font-size:24px}
+
+  .footer{text-align:center;padding:16px 16px 32px;font-size:12px;color:#aaa}
+  .footer strong{color:var(--hl)}
+  @media print{body{background:#fff}.card{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">🏆 Formula Premium Eksklusif</div>
+  <h1>POC <span>Jangkrik & Ulat Hongkong</span><br>Tani Gold Booster</h1>
+  <p>Formula pupuk organik cair premium berbasis kotoran serangga — kandungan nitrogen tertinggi, fermentasi tercepat, hasil paling optimal</p>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-val">3–5%</div><div class="hs-lbl">Kandungan N</div></div>
+    <div class="hs"><div class="hs-val">7–10 Hari</div><div class="hs-lbl">Fermentasi</div></div>
+    <div class="hs"><div class="hs-val">2× Lebih</div><div class="hs-lbl">Efektif dari Kambing</div></div>
+    <div class="hs"><div class="hs-val">Premium</div><div class="hs-lbl">Varian Baru</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- 1. KEUNGGULAN BAHAN -->
+  <div class="sec"><div class="sec-num">1</div><h2>Mengapa Jangkrik & Ulat Hongkong Lebih Unggul?</h2></div>
+  <div class="card">
+    <div class="card-body">
+      <div class="kand-grid">
+        <div class="kand-item biasa">
+          <div class="kand-ico">🐐</div>
+          <div class="kand-name">Kambing/Kelinci/Ayam</div>
+          <div class="kand-row"><span class="kr-l">Nitrogen (N)</span><span class="kr-r">0,6–1,7%</span></div>
+          <div class="kand-row"><span class="kr-l">Fosfor (P)</span><span class="kr-r">0,3–1,9%</span></div>
+          <div class="kand-row"><span class="kr-l">Kalium (K)</span><span class="kr-r">0,2–0,9%</span></div>
+          <div class="kand-row"><span class="kr-l">Fermentasi</span><span class="kr-r">14–21 hari</span></div>
+          <div class="kand-star">⭐⭐⭐</div>
+        </div>
+        <div class="kand-item jk">
+          <div class="kand-ico">🦗</div>
+          <div class="kand-name">Kotoran Jangkrik</div>
+          <div class="kand-row"><span class="kr-l">Nitrogen (N)</span><span class="kr-r">2,5–4%</span></div>
+          <div class="kand-row"><span class="kr-l">Fosfor (P)</span><span class="kr-r">2–3%</span></div>
+          <div class="kand-row"><span class="kr-l">Kalium (K)</span><span class="kr-r">1,5%</span></div>
+          <div class="kand-row"><span class="kr-l">Fermentasi</span><span class="kr-r">7–10 hari</span></div>
+          <div class="kand-star">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div class="kand-item uh">
+          <div class="kand-ico">🐛</div>
+          <div class="kand-name">Kotoran Ulat Hongkong</div>
+          <div class="kand-row"><span class="kr-l">Nitrogen (N)</span><span class="kr-r">3–5%</span></div>
+          <div class="kand-row"><span class="kr-l">Fosfor (P)</span><span class="kr-r">2,5–4%</span></div>
+          <div class="kand-row"><span class="kr-l">Kalium (K)</span><span class="kr-r">1,8%</span></div>
+          <div class="kand-row"><span class="kr-l">Fermentasi</span><span class="kr-r">7–10 hari</span></div>
+          <div class="kand-star">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+      <div class="versus">
+        <div class="vs-old">
+          <div class="vs-title">Formula Lama</div>
+          <div class="vs-name">Regular (Kambing dll)</div>
+          <div class="vs-items">
+            N rendah 0,6–1,7%<br>
+            Fermentasi 14–21 hari<br>
+            Tekstur kasar, perlu saring<br>
+            Harga jual Rp 15.000
+          </div>
+        </div>
+        <div class="vs-mid"><span>VS</span></div>
+        <div class="vs-new">
+          <div class="vs-title">Formula Baru</div>
+          <div class="vs-name">Premium (JK + UH)</div>
+          <div class="vs-items">
+            N tinggi 3–5% 🏆<br>
+            Fermentasi 7–10 hari ⚡<br>
+            Tekstur halus, mudah larut ✅<br>
+            Harga jual Rp 20.000–25.000
+          </div>
+        </div>
+      </div>
+      <div class="premium" style="margin-bottom:0">
+        <div class="pt">🦗 Bonus Kandungan Eksklusif</div>
+        Kotoran jangkrik & ulat hongkong mengandung <strong>kitin alami</strong> — senyawa yang terbukti merangsang sistem ketahanan tanaman terhadap serangan hama & penyakit jamur. Ini tidak ada di pupuk konvensional manapun!
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. FORMULA PRODUKSI -->
+  <div class="sec"><div class="sec-num">2</div><h2>Formula Produksi Premium (Per Batch 20 Liter)</h2></div>
+
+  <!-- Formula JK -->
+  <div class="card">
+    <div class="card-body">
+      <div class="formula jk">
+        <div class="f-label">Varian A — Fokus Nitrogen Tinggi</div>
+        <div class="f-title">🦗 POC Jangkrik Booster — Per Batch 20 Liter</div>
+        <div class="f-items">
+          <div class="f-item"><span class="fi-n">🦗 Kotoran Jangkrik (kering)</span><span class="fi-q">1,5 kg</span></div>
+          <div class="f-item"><span class="fi-n">🌰 NPK 16-16-16</span><span class="fi-q">100 g</span></div>
+          <div class="f-item"><span class="fi-n">🌾 Urea (booster N)</span><span class="fi-q">30 g</span></div>
+          <div class="f-item"><span class="fi-n">🍯 Gula merah (cair)</span><span class="fi-q">150 g</span></div>
+          <div class="f-item"><span class="fi-n">🥛 Yakult</span><span class="fi-q">2 botol (130 ml)</span></div>
+          <div class="f-item"><span class="fi-n">🥥 Air kelapa segar</span><span class="fi-q">500 ml</span></div>
+          <div class="f-item"><span class="fi-n">🌊 Air bersih</span><span class="fi-q">hingga 20 liter</span></div>
+        </div>
+        <div class="f-note">⚡ Fermentasi 7–10 hari · Hasil ±17 botol / batch · Fokus: vegetatif & anakan</div>
+      </div>
+
+      <!-- Formula UH -->
+      <div class="formula uh">
+        <div class="f-label">Varian B — Fokus Generatif & Buah</div>
+        <div class="f-title">🐛 POC Ulat Hongkong Booster — Per Batch 20 Liter</div>
+        <div class="f-items">
+          <div class="f-item"><span class="fi-n">🐛 Kotoran Ulat Hongkong (kering)</span><span class="fi-q">1,5 kg</span></div>
+          <div class="f-item"><span class="fi-n">🟤 KCl (sumber K)</span><span class="fi-q">100 g</span></div>
+          <div class="f-item"><span class="fi-n">🌰 SP-36 (sumber P)</span><span class="fi-q">80 g (rendam, ambil airnya)</span></div>
+          <div class="f-item"><span class="fi-n">🍯 Gula merah (cair)</span><span class="fi-q">150 g</span></div>
+          <div class="f-item"><span class="fi-n">🥛 Yakult</span><span class="fi-q">2 botol (130 ml)</span></div>
+          <div class="f-item"><span class="fi-n">🍌 Bonggol pisang (MOL)</span><span class="fi-q">300 g (peras airnya)</span></div>
+          <div class="f-item"><span class="fi-n">🌊 Air bersih</span><span class="fi-q">hingga 20 liter</span></div>
+        </div>
+        <div class="f-note">⚡ Fermentasi 7–10 hari · Hasil ±17 botol / batch · Fokus: berbunga, buah & pengisian bulir</div>
+      </div>
+
+      <!-- Formula Combo -->
+      <div class="formula combo" style="margin-bottom:0">
+        <div class="f-label">⭐ Varian Combo — Paling Direkomendasikan</div>
+        <div class="f-title">🦗🐛 POC JK+UH Super Booster — Per Batch 20 Liter</div>
+        <div class="f-items">
+          <div class="f-item"><span class="fi-n">🦗 Kotoran Jangkrik (kering)</span><span class="fi-q">750 g</span></div>
+          <div class="f-item"><span class="fi-n">🐛 Kotoran Ulat Hongkong (kering)</span><span class="fi-q">750 g</span></div>
+          <div class="f-item"><span class="fi-n">🌰 NPK 16-16-16</span><span class="fi-q">100 g</span></div>
+          <div class="f-item"><span class="fi-n">🟤 KCl</span><span class="fi-q">50 g</span></div>
+          <div class="f-item"><span class="fi-n">🍯 Gula merah (cair)</span><span class="fi-q">150 g</span></div>
+          <div class="f-item"><span class="fi-n">🥛 Yakult</span><span class="fi-q">2 botol (130 ml)</span></div>
+          <div class="f-item"><span class="fi-n">🥥 Air kelapa segar</span><span class="fi-q">300 ml</span></div>
+          <div class="f-item"><span class="fi-n">🌊 Air bersih</span><span class="fi-q">hingga 20 liter</span></div>
+        </div>
+        <div class="f-note">🏆 Formula terlengkap — cocok untuk SEMUA fase tanaman · Fermentasi 7–10 hari · ±17 botol/batch</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. SOP PRODUKSI -->
+  <div class="sec"><div class="sec-num">3</div><h2>SOP Produksi Khusus JK & UH</h2></div>
+  <div class="card">
+    <div class="card-body">
+      <ul class="steps">
+        <li>
+          <div class="snum">1</div>
+          <div class="stext">
+            <strong>Kumpulkan & Keringkan Kotoran</strong>
+            <span>Ambil kotoran dari bawah kandang jangkrik/ulat. Jemur di tempat teduh berangin 1–2 hari hingga kadar air berkurang. Jangan dijemur langsung di terik matahari — nutrisi bisa rusak.</span>
+            <div class="stag-o">☀️ Jemur teduh, bukan terik</div>
+          </div>
+        </li>
+        <li>
+          <div class="snum">2</div>
+          <div class="stext">
+            <strong>Timbang Sesuai Formula</strong>
+            <span>Timbang kotoran sesuai takaran. Karena tekstur sangat halus, tidak perlu dihaluskan lagi. Langsung bisa dimasukkan ke wadah fermentasi.</span>
+            <div class="stag-g">✅ Tidak perlu dihaluskan lagi</div>
+          </div>
+        </li>
+        <li>
+          <div class="snum">3</div>
+          <div class="stext">
+            <strong>Cairkan Gula Merah</strong>
+            <span>Larutkan 150g gula merah dalam 200ml air hangat hingga benar-benar cair. Ini sebagai sumber energi bagi mikroba fermentasi.</span>
+            <div class="stag">⏱ 5 menit</div>
+          </div>
+        </li>
+        <li>
+          <div class="snum">4</div>
+          <div class="stext">
+            <strong>Campur Semua Bahan ke Drum</strong>
+            <span>Masukkan kotoran → air 15 liter → NPK/KCl → gula merah cair → Yakult → air kelapa → aduk merata 5 menit. Tambah air hingga tepat 20 liter.</span>
+            <div class="stag">⏱ 15 menit</div>
+          </div>
+        </li>
+        <li>
+          <div class="snum">5</div>
+          <div class="stext">
+            <strong>Fermentasi Anaerob</strong>
+            <span>Tutup drum rapat. Pasang selang kecil di tutup untuk keluarkan gas CO₂. Simpan di tempat teduh suhu 25–32°C. Aduk sekali sehari selama 3 hari pertama.</span>
+            <div class="stag">⏱ 7–10 hari</div>
+          </div>
+        </li>
+        <li>
+          <div class="snum">6</div>
+          <div class="stext">
+            <strong>Cek Kematangan di Hari ke-7</strong>
+            <span>Bau berubah dari menyengat tajam → asam segar (seperti tape). Warna coklat tua pekat. Tidak ada gelembung aktif. Jika sudah — siap disaring & dikemas!</span>
+            <div class="stag-g">✅ Lebih cepat dari formula lama!</div>
+          </div>
+        </li>
+        <li>
+          <div class="snum">7</div>
+          <div class="stext">
+            <strong>Saring & Kemas</strong>
+            <span>Karena tekstur kotoran sangat halus, saring dengan kain kasa 1 lapis sudah cukup — hasilnya akan lebih bersih dari formula kambing. Masukkan ke botol, tutup rapat, pasang label.</span>
+            <div class="stag-g">🧴 Hasil lebih bersih & jernih</div>
+          </div>
+        </li>
+      </ul>
+      <div class="tip" style="margin-top:4px;margin-bottom:0">
+        <div class="tt">⚡ Keunggulan Produksi JK+UH vs Formula Lama</div>
+        Hemat waktu <strong>7–14 hari</strong> fermentasi · Hasil lebih bersih · Tidak perlu saring berulang · Aroma lebih ringan setelah matang · Produksi bisa 2× lebih cepat per bulan!
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. PRODUK & HARGA -->
+  <div class="sec"><div class="sec-num">4</div><h2>Lini Produk & Harga Jual</h2></div>
+  <div class="card">
+    <div class="card-body">
+      <div class="produk-grid">
+        <div class="pg-item regular">
+          <div class="pg-ico">🌿</div>
+          <div class="pg-name">Tani Gold Regular</div>
+          <div class="pg-desc">Berbasis kotoran kambing, kelinci & ayam. Cocok kebutuhan dasar anggota.</div>
+          <div class="pg-price">Rp 15.000</div>
+          <div class="pg-sub">per botol 1 liter</div>
+        </div>
+        <div class="pg-item premium">
+          <div class="pg-ico">🦗🐛</div>
+          <div class="pg-name">Tani Gold Premium</div>
+          <div class="pg-desc">Berbasis kotoran jangkrik & ulat hongkong. Formula eksklusif nitrogen tertinggi.</div>
+          <div class="pg-price">Rp 22.000</div>
+          <div class="pg-sub">per botol 1 liter · rekomendasi</div>
+        </div>
+      </div>
+      <div class="info" style="margin-bottom:0">
+        <div class="it">📈 Strategi Dua Produk</div>
+        Regular untuk anggota yang butuh harga terjangkau. Premium untuk anggota yang mau hasil maksimal atau untuk dijual ke luar Poktan. Bahan baku Premium <strong>lebih murah</strong> (cukup 1,5 kg vs 4 kg kotoran biasa) tapi harga jual <strong>47% lebih tinggi</strong> — margin jauh lebih besar!
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. SIMULASI KEUNTUNGAN -->
+  <div class="sec"><div class="sec-num">5</div><h2>Simulasi Keuntungan Produk Premium</h2></div>
+  <div class="card">
+    <div class="card-body">
+      <div class="profit-card">
+        <div class="pc-lbl">📊 Simulasi 1.000 Botol Tani Gold Premium (JK+UH)</div>
+        <div class="pc-row"><span class="pl">Bahan baku kotoran JK+UH (1,5 kg × 59 batch)</span><span class="pr minus">− Rp 88.500</span></div>
+        <div class="pc-row"><span class="pl">Bahan mineral pendukung (NPK, KCl, dll)</span><span class="pr minus">− Rp 95.000</span></div>
+        <div class="pc-row"><span class="pl">Gula merah + Yakult (59 batch)</span><span class="pr minus">− Rp 177.000</span></div>
+        <div class="pc-row"><span class="pl">Kemasan botol + label + seal (1.003 pcs)</span><span class="pr minus">− Rp 3.109.300</span></div>
+        <div class="pc-row"><span class="pl">Operasional & tenaga kerja</span><span class="pr minus">− Rp 420.000</span></div>
+        <div class="pc-row"><span class="pl">Total Modal</span><span class="pr minus">− Rp 3.889.800</span></div>
+        <div class="pc-row"><span class="pl">Total Omset (1.000 × Rp 22.000)</span><span class="pr">+ Rp 22.000.000</span></div>
+        <div class="pc-row hasil"><span class="pl">💰 KAS POKTAN BERSIH</span><span class="pr">Rp 18.110.200</span></div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Produk</th><th>Modal/Botol</th><th>Harga Jual</th><th>Untung/Botol</th><th>Margin</th></tr></thead>
+          <tbody>
+            <tr><td>🌿 Regular (Kambing dll)</td><td>Rp 4.146</td><td>Rp 15.000</td><td>Rp 10.854</td><td>72%</td></tr>
+            <tr><td>🦗🐛 Premium (JK+UH)</td><td>Rp 3.890</td><td>Rp 22.000</td><td><strong>Rp 18.110</strong></td><td><strong>82%</strong></td></tr>
+            <tr class="total-row"><td colspan="4">🏆 Premium lebih menguntungkan — modal lebih kecil, harga jual lebih tinggi!</td><td>+10%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warn" style="margin-top:14px;margin-bottom:0">
+        <div class="wt">⚠️ Catatan Penting</div>
+        Harga Rp 22.000 perlu dikomunikasikan dengan baik ke anggota — jelaskan keunggulan kandungan N 3–5× lebih tinggi, fermentasi lebih cepat, dan adanya kandungan kitin alami yang tidak ada di produk lain. <strong>Edukasi = kunci penerimaan harga premium.</strong>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Formula ini dikembangkan khusus berdasarkan potensi bahan baku lokal KTSadar Gunungguruh, Sukabumi.<br>
+  Lakukan uji batch kecil (1–2 batch) terlebih dahulu sebelum produksi skala penuh.<br>
+  <strong>Tani Gold Booster Premium · Kelompok Tani Sadar · Gunungguruh, Sukabumi</strong><br>
+  📞 083871666136 · ✉ malviejayagroup@gmail.com
+</div>
+
+</body>
+</html>
